@@ -1,6 +1,6 @@
 {
   "name": "sequery",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Automatically parse nested query string parameters into Sequelize find options.",
   "main": "index.js",
   "scripts": {
