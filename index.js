@@ -17,6 +17,8 @@ module.exports = function parseListOpts(querystring, defaults) {
 
   const { limit, offset, where } = opts;
 
+  if (!Array.isArray(opts.order)) opts.order = [opts.order];
+
   const order = opts.order.map(field => {
     const orderPart = field.split('-').reverse();
     if (typeof orderPart[1] === 'string') orderPart[1] = 'DESC';
