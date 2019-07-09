@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/zjr/sequery/compare/v0.2.0...v0.2.1) (2019-07-09)
+
+
+### Bug Fixes
+
+* correct issue with default order value ([fa5adf1](https://github.com/zjr/sequery/commit/fa5adf1))
+
+
+
 ## [0.2.0](https://github.com/zjr/sequery/compare/v0.1.0...v0.2.0) (2019-07-09)
 
 
