@@ -13,7 +13,7 @@ module.exports = function parseListOpts(querystring, defaults, opts = { format: 
     limit: 20,
     offset: 0,
 
-    order: opts.format === 'knex' ? {} : [],
+    order: [],
     where: {},
 
     ...defaults,
