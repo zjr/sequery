@@ -1,28 +1,36 @@
 const qs = require('qs');
 const pick = require('lodash.pick');
 
-module.exports = function parseListOpts(querystring, defaults) {
-  const query = pick(qs.parse(querystring), ['limit', 'offset', 'order', 'where']);
+module.exports = function parseListOpts(querystring, defaults, opts = { format: 'knex' }) {
+  if (opts.format && !/(sequelize|knex)/.test(opts.format)) console.warn('unsupported format');
 
-  const opts = {
+  const parsedQuery = pick(qs.parse(querystring), ['limit', 'offset', 'order', 'where']);
+
+  // query ex: `order=id&order=-name`
+  // query ex: `where[name]=doug&where[color]=red`
+
+  const query = {
     limit: 20,
     offset: 0,
 
-    order: [], // query ex: `order=id&order=-name`
-    where: {}, // query ex: `where[name]=doug&where[color]=red`
+    order: opts.format === 'knex' ? {} : [],
+    where: {},
 
     ...defaults,
-    ...query
+    ...parsedQuery
   };
 
-  const { limit, offset, where } = opts;
+  let { limit, offset, where } = query;
 
-  if (!Array.isArray(opts.order)) opts.order = [opts.order];
+  limit = parseInt(limit);
+  offset = parseInt(offset);
 
-  const order = opts.order.map(field => {
-    const orderPart = field.split('-').reverse();
-    if (typeof orderPart[1] === 'string') orderPart[1] = 'DESC';
-    return orderPart;
+  if (!Array.isArray(query.order)) query.order = [query.order];
+
+  const order = query.order.map(field => {
+    let [column, order] = field.split('-').reverse();
+    order = typeof order === 'string' ? 'desc' : 'asc';
+    return opts.format === 'knex' ? { column, order } : [column, order];
   });
 
   return { limit, offset, order, where };
