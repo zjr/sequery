@@ -4,12 +4,14 @@ const pick = require('lodash.pick');
 module.exports = function parseListOpts(querystring, defaults, opts = { format: 'knex' }) {
   if (opts.format && !/(sequelize|knex)/.test(opts.format)) console.warn('unsupported format');
 
-  const parsedQuery = pick(qs.parse(querystring), ['limit', 'offset', 'order', 'where']);
+  const baseQuery = qs.parse(querystring);
+  const parsedQuery = pick(baseQuery, ['page', 'limit', 'offset', 'order', 'where']);
 
   // query ex: `order=id&order=-name`
   // query ex: `where[name]=doug&where[color]=red`
 
   const query = {
+    page: 0,
     limit: 20,
     offset: 0,
 
@@ -20,8 +22,9 @@ module.exports = function parseListOpts(querystring, defaults, opts = { format: 
     ...parsedQuery
   };
 
-  let { limit, offset, where } = query;
+  let { page, limit, offset, where } = query;
 
+  page = parseInt(page);
   limit = parseInt(limit);
   offset = parseInt(offset);
 
@@ -33,6 +36,5 @@ module.exports = function parseListOpts(querystring, defaults, opts = { format: 
     return opts.format === 'knex' ? { column, order } : [column, order];
   });
 
-  return { limit, offset, order, where };
+  return { ...baseQuery, page, limit, offset, order, where };
 };
-
