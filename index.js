@@ -1,7 +1,11 @@
 const qs = require('qs');
 const pick = require('lodash.pick');
 
-module.exports = function parseListOpts(querystring, defaults, opts = { format: 'knex' }) {
+module.exports = function parseListOpts(
+  querystring,
+  defaults,
+  opts = { format: 'knex', pageBase: 0 }
+) {
   if (opts.format && !/(sequelize|knex)/.test(opts.format)) console.warn('unsupported format');
 
   const baseQuery = qs.parse(querystring);
@@ -11,7 +15,7 @@ module.exports = function parseListOpts(querystring, defaults, opts = { format: 
   // query ex: `where[name]=doug&where[color]=red`
 
   const query = {
-    page: 0,
+    page: opts.pageBase,
     limit: 20,
     offset: 0,
 
