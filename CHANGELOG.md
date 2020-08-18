@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/zjr/sequery/compare/v0.3.0...v0.4.0) (2020-08-18)
+
+
+### Features
+
+* allow configuring pageBase ([a3bf8a6](https://github.com/zjr/sequery/commit/a3bf8a6))
+
+
+
 ## [0.3.0](https://github.com/zjr/sequery/compare/v0.2.1...v0.3.0) (2019-07-17)
 
 
