@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.1](https://github.com/zjr/sequery/compare/v0.4.0...v0.4.1) (2020-09-14)
+
+
+### Bug Fixes
+
+* better fallback for opts.pageBase ([2a0e86e](https://github.com/zjr/sequery/commit/2a0e86e))
+
+
+
 ## [0.4.0](https://github.com/zjr/sequery/compare/v0.3.0...v0.4.0) (2020-08-18)
 
 
