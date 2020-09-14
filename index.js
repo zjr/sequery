@@ -15,7 +15,7 @@ module.exports = function parseListOpts(
   // query ex: `where[name]=doug&where[color]=red`
 
   const query = {
-    page: opts.pageBase,
+    page: opts.pageBase || 0,
     limit: 20,
     offset: 0,
 
